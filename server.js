@@ -11,20 +11,26 @@ app.use(express.static(__dirname + '/public'));
 // server side connection
 io.on('connection', (socket) => {
 
-    // welcome the user
-    socket.emit('message', `BOT: Hey User ${socket.id}. You're connected!`); // logs a message when user connects
+    // event handler for all clients with their nickname
+    socket.on('name', username => {
+        // welcomes the user
+        console.log(`User ${socket.id} is ${username}`);
 
-    // sending a welcoming message to all clients except the sender 
-    socket.broadcast.emit('message', `User ${socket.id} just joined!`);
+        // sends a welcoming message to client when they connect
+        socket.emit('message', `Hey ${username}. You're connected!`);
 
-    // captures input value event and sends it to client to print to chat
-    socket.on('chat message', msg => {
-        io.emit('message', `User ${socket.id}: ${msg}`);
-    });
-    
-    // logs a message to whole server when user disconnects
-    socket.on('disconnect', () => {
-        io.emit('message', `Oh no! User ${socket.id} disconnected!`); 
+        // broadcasts a welcoming message to all other clients minus sender 
+        socket.broadcast.emit('message', `${username} just joined!`);
+
+        // captures input value event and sends it to client to showcase in chat
+        socket.on('chat message', msg => {
+            io.emit('message', `${username}: ${msg}`);
+        });
+
+        // captures disconnectivity event and sends to client to showcase in chat
+        socket.on('disconnect', () => {
+            io.emit('message', `Oh no! User ${username} disconnected!`); 
+        });
     });
 });
 
