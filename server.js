@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
 
         // captures disconnectivity event and sends to client to showcase in chat
         socket.on('disconnect', () => {
-            io.emit('message', `Oh no! User ${username} disconnected!`); 
+            io.emit('message', `Oh no! ${username} disconnected!`); 
         });
     });
 });
