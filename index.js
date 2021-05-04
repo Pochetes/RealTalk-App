@@ -9,19 +9,22 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-// event handler for all messages
-io.on('connection', (socket) => {
-    console.log('a user connected'); // logs sockets connected to the server to console
-    
-    socket.on('disconnect', () => {
-        console.log('a user disconnected'); // logs sockets that leave the server to console
-    });
 
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg); // logs a msg to all other sockets in the server
+// server side connection
+io.on('connection', (socket) => {
+
+    // welcome the user
+    socket.emit('message', `BOT: Hey User ${socket.id}. You're connected!`); // logs a message when user connects
+
+    // sending a welcoming message to all clients except the sender 
+    socket.broadcast.emit('message', `User ${socket.id} just joined!`);
+
+    socket.on('disconnect', () => {
+        // logs a message to whole serverwhen user disconnects
+        io.emit('message', `Oh no! User ${socket.id} disconnected!`); 
     });
 });
 
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+server.listen(3000, () => { // identifies when server is running on my local domain
+    console.log("Server running...");
 });
