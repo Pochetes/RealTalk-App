@@ -17,10 +17,12 @@ let socket = io('http://localhost:3000');
         // sends username to server for classification
         socket.emit('name', username);
 
+        // event handler for all info messages
+        socket.on('info', data => {
+            $("#messages").append(`<li><i><b>${data}</b></i></li>`);
+        });
+
         // event handler for messages for broadcasts, one client, or whole server
         socket.on('message', function(data) {
-            let item = document.createElement('li');
-            item.textContent = data;
-            messages.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
+            $("#messages").append(`<li>${data}</li>`);
         });

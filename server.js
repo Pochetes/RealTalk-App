@@ -17,10 +17,10 @@ io.on('connection', (socket) => {
         console.log(`User ${socket.id} is ${username}`);
 
         // sends a welcoming message to client when they connect
-        socket.emit('message', `Hey ${username}. You're connected!`);
+        socket.emit('info', `Hey ${username}. You're connected!`);
 
         // broadcasts a welcoming message to all other clients minus sender 
-        socket.broadcast.emit('message', `${username} just joined!`);
+        socket.broadcast.emit('info', `${username} just joined!`);
 
         // captures input value event and sends it to client to showcase in chat
         socket.on('chat message', msg => {
@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
 
         // captures disconnectivity event and sends to client to showcase in chat
         socket.on('disconnect', () => {
-            io.emit('message', `Oh no! ${username} disconnected!`); 
+            io.emit('info', `Oh no! ${username} disconnected!`); 
         });
     });
 });
