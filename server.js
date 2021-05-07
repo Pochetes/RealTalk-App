@@ -31,9 +31,9 @@ io.on('connection', (socket) => {
         // captures keypress event and sends it back to client to show or hide
         socket.on('typing', data => {
             if (data.isTyping) {
-                io.emit('userTyping', data);
+                socket.broadcast.emit('userTyping', data);
             } else {
-                io.emit('userTyping', data);
+                socket.broadcast.emit('userTyping', data);
             }
         });
 
