@@ -5,6 +5,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
+app.use(require('cors')());
 app.use(express.static(__dirname + '/public'));
 
 
@@ -25,6 +26,15 @@ io.on('connection', (socket) => {
         // captures input value event and sends it to client to showcase in chat
         socket.on('chat message', msg => {
             io.emit('message', `${username}: ${msg}`);
+        });
+
+        // captures keypress event and sends it back to client to show or hide
+        socket.on('typing', data => {
+            if (data.isTyping) {
+                io.emit('userTyping', data);
+            } else {
+                io.emit('userTyping', data);
+            }
         });
 
         // captures disconnectivity event and sends to client to showcase in chat
