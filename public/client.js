@@ -5,16 +5,24 @@ let socket = io('http://localhost:3000');
         let username = prompt("What is your name?");
         let isTyping = false;
 
-        // allows messages to be posted on the chat
+        // prints messages in chat
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             if (input.value) {
                 // sends input value to the server 
                 socket.emit('chat message', input.value);
                 input.value = '';
-                isTyping = false;
             }
         });
+
+        // checks input value during keyup and updates server event
+        const checkTyping = () => {
+            if (input.value.length >= 1) {
+                socket.emit('typing', {user: username, isTyping: true});
+            } else{
+                socket.emit('typing', {user: username, isTyping: false});
+            }
+        }
 
         // sends username to server for classification
         socket.emit('name', username);
@@ -22,15 +30,6 @@ let socket = io('http://localhost:3000');
         // event handler for all info messages
         socket.on('info', data => {
             $("#messages").append(`<li><i><b>${data}</b></i></li>`);
-        });
-
-        // on key press, checks whether user has information in the input or not
-        $("#input").keypress( (e) => {
-            if (e.which != 13) {
-                socket.emit('typing', {user: username, isTyping: true});
-            } else {
-                socket.emit('typing', {user: username, isTyping: false});
-            };
         });
       
         // event handler that prints who is typing at the moment
