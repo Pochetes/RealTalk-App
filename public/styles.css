@@ -49,3 +49,8 @@ body {
     bottom: 4em;
     right: 2em;
 }
+
+#online {
+    position: relative;
+    bottom: 58.5em;
+}

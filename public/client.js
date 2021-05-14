@@ -15,6 +15,11 @@ let socket = io('http://localhost:3000');
             }
         });
 
+        // receives event from online channel and prints num of users online
+        socket.on('onlineUsers', (data) => {
+            $('#online').text(`${data} people online`);
+        })
+
         // checks input value during keyup and updates server event
         const checkTyping = () => {
             if (input.value.length >= 1) {

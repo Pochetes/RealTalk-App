@@ -8,6 +8,7 @@ const io = new Server(server);
 app.use(require('cors')());
 app.use(express.static(__dirname + '/public'));
 
+let userCount = 0;
 
 // server side connection
 io.on('connection', (socket) => {
@@ -15,6 +16,7 @@ io.on('connection', (socket) => {
     // event handler for all clients with their nickname
     socket.on('name', username => {
         // welcomes the user
+        userCount++;
         console.log(`User ${socket.id} is ${username}`);
 
         // sends a welcoming message to client when they connect
@@ -22,6 +24,9 @@ io.on('connection', (socket) => {
 
         // broadcasts a welcoming message to all other clients minus sender 
         socket.broadcast.emit('info', `${username} just joined!`);
+
+        // counts how many users online and sends to client for print
+        io.emit('onlineUsers', userCount);
 
         // captures input value event and sends it to client to showcase in chat
         socket.on('chat message', msg => {
@@ -39,6 +44,8 @@ io.on('connection', (socket) => {
 
         // captures disconnectivity event and sends to client to showcase in chat
         socket.on('disconnect', () => {
+            userCount--;
+            io.emit('onlineUsers', userCount);
             io.emit('info', `Oh no! ${username} disconnected!`); 
         });
     });
