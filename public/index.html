@@ -10,12 +10,20 @@
 </head>
 <body>
 
-    <ul id="messages"></ul>
-    <form id="form" action="">
-        <input id="input" autocomplete="off" placeholder="Send message..." onkeyup="checkTyping();"/><button>Send</button>
-        <p id="typing"></p>
+    <div class="chat-container">
+        <div class="message-feed">
+            <ul id="messages"></ul>
+        </div>
+        <div class="user-message-box">
+            <form id="form" action="">
+                <input id="input" autocomplete="off" placeholder="Send message..." onkeyup="checkTyping();"/><button>Send</button>
+                <p id="typing"></p>
+            </form>
+        </div>
+    </div>
+    <div id="wrapper">
         <p id="online"></p>
-    </form>
+    </div>
     
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
