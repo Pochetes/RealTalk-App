@@ -14,9 +14,30 @@ body {
 
 html {  
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-    background: linear-gradient(to right, #57c1eb 0%,#246fa8 100%);
+    background: #EEEEEE;  
 }
 
+header {
+    position: absolute;
+    top: 10px;
+    font-size: 2em;
+}
+
+header > h1 > .first-word {
+    color: white;
+    background: linear-gradient(to right, #57c1eb 0%,#246fa8 100%);;
+    padding: 2px 5px;
+    margin: 0;
+}
+
+.second-word {
+    background-image: linear-gradient(to right, #57c1eb 0%,#246fa8 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
 #form { 
     background: rgba(0, 0, 0, 0.15); 
     padding: 0.25rem;
@@ -46,6 +67,11 @@ html {
     outline: none; 
     color: #fff; }
 
+    #form > button:hover {
+    background: white;
+    color: #333;
+}
+
 .message-feed #messages{ 
     list-style-type: none; 
     margin: 0; 
@@ -63,7 +89,7 @@ html {
 }
 
 #messages > li:nth-child(odd) {
-    background: #efefef; } 
+    background: #AFB3B0; } 
 
 #typing {
     position: relative;
@@ -73,10 +99,23 @@ html {
     position: relative;
 }
 #online {
+    border: solid black;
+    padding: 0.7em;
+    border-radius: 5em;
     position: fixed;
     width: 150px;
     top: 0;
     right: 0;
+    color: white;
+    background:black;
+    margin-right: 2em;
+    text-align: center;
+    margin-top: 1.5em;
+    
+}
+
+#online:hover {
+    font-weight: bold;
 }
 
 .chat-container {
@@ -87,7 +126,7 @@ html {
     background: #FFF;
     flex-grow: 1;
     border-radius: 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
     overflow: auto;
  }
  
