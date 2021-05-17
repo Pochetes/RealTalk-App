@@ -65,11 +65,14 @@ header > h1 > .first-word {
     margin: 0.25rem; 
     border-radius: 3px; 
     outline: none; 
-    color: #fff; }
+    color: #fff; 
+    font-weight: bold;
+}
 
     #form > button:hover {
     background: white;
     color: #333;
+    font-weight: bold;
 }
 
 .message-feed #messages{ 
@@ -93,6 +96,14 @@ header > h1 > .first-word {
 
 #typing {
     position: relative;
+    background: #333; 
+    border: none; 
+    padding: 0.5rem 1rem; 
+    margin: 0.25rem; 
+    border-radius: 3px; 
+    outline: none; 
+    color: #fff; 
+    font-weight: bold;
 }
 
 #wrapper {
