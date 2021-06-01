@@ -18,4 +18,14 @@ It also works well handling multiple sockets at a time:
 
 ![second-half](public/images/second-half-vid.gif)
 
- 
+## Installation
+
+To view this app, clone this repository and use `npm install` to download all dependancies. You might need to revise the package.JSON file to choose your own port needed and update versions of dependencies.
+
+On the Command Line, run the application using:
+
+`node server.js`
+
+On the browser, type `localhost:<specified-port>` to view the app running.
+
+ENJOY!
